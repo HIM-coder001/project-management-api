@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node sevver.js",
     "dev": "nodemon server.js",
+    "seed":    "node scripts/seeds.js",
     "worker:dev": "nodemon src/workers/emailWorker.js",
     "test": "jest --runInBand --forceExit",
     "test:watch": "jest --runInBand forceExit --watch",
