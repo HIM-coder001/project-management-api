@@ -5,7 +5,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 require("./src/db.js")
-require("./src/redis.js")
+// require("./src/redis.js")
 require("./scripts/migrate.js")
 
 //Middleware
@@ -16,14 +16,14 @@ const{generalLimiter , authLimiter} = require("./src/middleware/rateLimiter.js")
 app.use(generalLimiter)
 
 //Routes
-// const authRoutes = require("./src/routes/authRoutes.js")
-// const organisationsRoutes = require("./src/routes/organisationRoutes.js")
+const authRoutes = require("./src/routes/authRoutes.js")
+const organisationsRoutes = require("./src/routes/organisationRoutes.js")
 // const membersRoutes = require("./src/routes/memberRoutes.js")
 // const projectsRoutes = require("./src/routes/projectRoutes.js")
 // const tasksRoutes = require("./src/routes/taskRoutes.js")
 
-// app.use("/api/v1/auth", authLimiter, authRoutes)
-// app.use("/api/v1/organisations", organisationsRoutes)
+app.use("/api/v1/auth", authLimiter, authRoutes)
+app.use("/api/v1/organisations", organisationsRoutes)
 // app.use("/api/v1/members", membersRoutes)
 // app.use("/api/v1/projects", projectsRoutes)
 // app.use("/api/v1/tasks", tasksRoutes)
