@@ -68,6 +68,17 @@ const seed = async () => {
     `)
     console.log(' tasks seeded')
 
+    // Synchronize SERIAL sequences with the seeded data
+await client.query(`
+  SELECT setval('organisations_id_seq', COALESCE((SELECT MAX(id) FROM organisations), 1), true);
+  SELECT setval('users_id_seq', COALESCE((SELECT MAX(id) FROM users), 1), true);
+  SELECT setval('projects_id_seq', COALESCE((SELECT MAX(id) FROM projects), 1), true);
+  SELECT setval('tasks_id_seq', COALESCE((SELECT MAX(id) FROM tasks), 1), true);
+  SELECT setval('invitations_id_seq', COALESCE((SELECT MAX(id) FROM invitations), 1), true);
+`);
+
+console.log('SERIAL sequences synchronized');
+
     console.log('\nDatabase seeded!')
     console.log('\nLogin with any of these:')
     console.log('  brian@acme.com           / password123  (owner  - Acme Corp)')
