@@ -1,7 +1,8 @@
 const express = require("express")
 const router = express.Router()
+const bcrypt = require('bcrypt')
 const pool = require("../db")
-const {protect , requireAdmin} = require('../middleware/auth')
+const {protect , requireRole} = require('../middleware/auth')
 const {sendSuccess , sendError} = require('../utils/response')
 
 
